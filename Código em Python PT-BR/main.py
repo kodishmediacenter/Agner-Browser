@@ -41,14 +41,21 @@ class MainWindow(QMainWindow):
 
    def navigate_to_url(self):
        url = self.url_bar.text()
-       self.browser.setUrl(QUrl(url))
+       data = len(url)
+       if url[0:4] == 'https' or url[0:3]=='http':
+           self.browser.setUrl(QUrl(url))
+       else:
+           prefix = 'http://'
+           url2 = ''+prefix+''+url+''
+           self.browser.setUrl(QUrl(url2))
+           
+    
 
    def update_url(self, q):
        self.url_bar.setText(q.toString())
 
 app = QApplication(sys.argv)
-QApplication.setApplicationName('Agner Browser')
+QApplication.setApplicationName('Kodish Web')
 window = MainWindow()
 app.exec_()
-
 
